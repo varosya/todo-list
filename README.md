@@ -6,7 +6,7 @@ Tasks are displayed in **descending order**, with the newest task appearing at t
 
 ---
 
-## Features
+## 🚀  Features
 
 - **Add new tasks** with a name and optional due date.
 - **Delete tasks** individually.
@@ -19,7 +19,7 @@ Tasks are displayed in **descending order**, with the newest task appearing at t
 
 ---
 
-## Technologies Used
+## 🛠️ Technologies Used
 
 - **HTML5** – Page structure
 - **CSS3** – Styling & layout
