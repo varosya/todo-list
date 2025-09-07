@@ -39,6 +39,16 @@ input {
     padding: 5px;
 }
 
+.task {
+    display: flex;
+    align-items: flex-start;
+}
+
+.completed-task {
+    text-decoration: line-through;
+    color: darkgray;
+}
+
 .task-amount {
     display: grid;
     grid-template-columns: 273px 100px;
