@@ -1,4 +1,5 @@
 let todoList = JSON.parse(localStorage.getItem('todoList')) || [];
+let l = todoList.length;
 
 renderTodoList();
 
@@ -8,7 +9,10 @@ function renderTodoList() {
     for (let i = todoList.length - 1; i >= 0; i--) {
         const { name, dueDate} = todoList[i];
         const html = `
-        <div>${name}</div>
+        <div class='task'>
+            <input type='checkbox' class='checkboxes'>
+            <div class='task-name'>${name}</div>
+        </div>
         <div>${dueDate}</div>
         <button class="delete-button">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -20,29 +24,43 @@ function renderTodoList() {
     };
     document.querySelector('.js-todo-list').innerHTML = todoListHtml;
 
-    const l = todoList.length;
-
     document.querySelectorAll('.delete-button')
         .forEach((deleteButton, index) => {
             deleteButton.addEventListener('click', () => {
                 todoList.splice(l - index - 1, 1);
                 renderTodoList();
                 saveToStorage();
+                displayTaskAmount();
+            });
         });
-    });
 
+    document.querySelectorAll('.checkboxes')
+        .forEach((checkbox, index) => {
+            checkbox.addEventListener('change', () => {
+                const taskName = checkbox.closest('.task').querySelector('.task-name');
+                todoList[l - index - 1].completed = checkbox.checked;
+                if (checkbox.checked) {
+                    taskName.classList.add('completed-task');
+                } else {
+                    taskName.classList.remove('completed-task');    
+                }
+                saveToStorage();
+                displayTaskAmount();
+            });
+        });
+    displayTaskAmount();
+}
 
+function displayTaskAmount() {
+    const pendingTasksAmount = todoList.filter(task => !task.completed).length;
     const numberOfTasks = document.querySelector('.task-amount');
 
-    if (l == 0) {
+
+    if (l === 0) {
         numberOfTasks.innerHTML = '';
-    } else if (l == 1) {
-        numberOfTasks.innerHTML = `
-        <span>You have ${l} pending task</span>
-        <button id="clear-all-button">Clear all</button>`;
     } else {
         numberOfTasks.innerHTML = `
-        <span>You have ${l} pending tasks</span>
+        <span>You have ${pendingTasksAmount} ${pendingTasksAmount === 1 ? 'task' : 'tasks'} pending task</span>
         <button id="clear-all-button">Clear all</button>`;
     }
 
@@ -84,4 +102,3 @@ function addTodo() {
 function saveToStorage() {
     localStorage.setItem('todoList', JSON.stringify(todoList));
 }
-
