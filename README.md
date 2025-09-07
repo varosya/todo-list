@@ -26,6 +26,8 @@ Tasks are displayed in **descending order**, with the newest task appearing at t
 - **Vanilla JavaScript (ES6)** – DOM manipulation & logic
 - **LocalStorage** – Persistent data storage
 
-Here’s what it looks like:
+## 🖼️ Screenshot
 
 ![App Screenshot](./assets/screenshot.png)
+
+[**Live Demo**](https://varosya.github.io/todo-list/)
